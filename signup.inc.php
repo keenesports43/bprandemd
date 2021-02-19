@@ -3,48 +3,45 @@ include_once 'dbh.inc.php';
 
 if (isset($_POST["submit"])) {
 
-  // First we get the form data from the URL
+  // Verzamelen data
   $name = mysqli_real_escape_string($conn, $_POST["name"]);
   $email = mysqli_real_escape_string($conn, $_POST["email"]);
   $username = mysqli_real_escape_string($conn, $_POST["uid"]);
   $pwd = mysqli_real_escape_string($conn, $_POST["pwd"]);
   $pwdRepeat = mysqli_real_escape_string($conn, $_POST["pwdrepeat"]);
 
-  // Then we run a bunch of error handlers to catch any user mistakes we can (you can add more than I did)
-  // These functions can be found in functions.inc.php
+  // Errorhandlers
+  // Referentie: functions.inc.php
 
   require_once 'functions.inc.php';
 
-  // Left inputs empty
-  // We set the functions "!== false" since "=== true" has a risk of giving us the wrong outcome
+  // Is not false ipv is true
   if (emptyInputSignup($name, $email, $username, $pwd, $pwdRepeat) !== false) {
     header("location: ../signup.php?error=emptyinput");
 		exit();
   }
-	// Proper username chosen
+  // Correcte gebruikersnaam
   if (invalidUid($uid) !== false) {
     header("location: ../signup.php?error=invaliduid");
 		exit();
   }
-  // Proper email chosen
+  // Correct mailadres
   if (invalidEmail($email) !== false) {
     header("location: ../signup.php?error=invalidemail");
 		exit();
   }
-  // Do the two passwords match?
+  // Wachtwoorden hetzelfde?
   if (pwdMatch($pwd, $pwdRepeat) !== false) {
     header("location: ../signup.php?error=passwordsdontmatch");
 		exit();
   }
-  // Is the username taken already
+  // Gebruikersnaam al in gebruik?
   if (uidExists($conn, $username, $username) !== false) {
     header("location: ../signup.php?error=usernametaken");
 		exit();
   }
 
-  // If we get to here, it means there are no user errors
-
-  // Now we insert the user into the database
+  // Maak nieuwe gebruiker aan
   createUser($conn, $name, $email, $username, $pwd);
 
 } else {
