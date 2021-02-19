@@ -14,7 +14,7 @@
     </form>
   </div>
   <?php
-    // Error messages
+    // Foutmeldingen:
     if (isset($_GET["error"])) {
       if ($_GET["error"] == "emptyinput") {
         echo "<p>Fill in all fields!</p>";
