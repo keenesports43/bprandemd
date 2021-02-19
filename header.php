@@ -50,5 +50,4 @@
   <a href="https://www.youtube.com/channel/UCeKqQU7B-l0WXAlg1wjR-cw" class="fa fa-youtube"></a>
 </section>
 
-<!--A quick wrapper to align the content (ends in footer.php)-->
 <div class="wrapper">
