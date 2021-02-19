@@ -17,7 +17,7 @@
     </head>
   <body>
 
-    <!--A quick navigation-->
+
     <nav>
       <div class="wrapper">
         <a href="index.php"></a>
